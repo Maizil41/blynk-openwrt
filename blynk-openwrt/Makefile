@@ -9,12 +9,19 @@ PKG_VERSION:=1.0
 PKG_RELEASE:=1
 PKG_MAINTAINER:=Maizil <https://github.com/Maizil41>
 
+PKG_LICENSE:=Apache-2.0
+PKG_LICENSE_FILES:=LICENSE
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/Maizil41/blynk-openwrt.git
+PKG_SOURCE_VERSION:=master
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
   SECTION:=net
   CATEGORY:=Network
-  TITLE:=blynk-openwrt
+  TITLE:=Blynk Lua client library for OpenWrt
   URL:=https://github.com/Maizil41/blynk-openwrt
   PKGARCH:=all
 endef
@@ -26,10 +33,12 @@ endef
 define Package/$(PKG_NAME)/conffiles
 endef
 
-define Build/Configure
+define Build/Prepare
+  $(CP) -r $(PKG_BUILD_DIR)/files/* $(1)
 endef
 
 define Build/Compile
+
 endef
 
 define Package/$(PKG_NAME)/install
