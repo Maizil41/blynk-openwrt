@@ -1,0 +1,21 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+STOP=10
+LOGFILE="/var/log/blynk.log"
+
+start() {
+    echo "Starting Blynk OpenWRT..." >> $LOGFILE
+    lua /usr/bin/blynk-openwrt.lua >> $LOGFILE 2>&1 &
+    echo $! > /var/run/blynk-openwrt.pid
+}
+
+stop() {
+    echo "Stopping Blynk OpenWRT script..." >> $LOGFILE
+    if [ -f /var/run/blynk-openwrt.pid ]; then
+        kill $(cat /var/run/blynk-openwrt.pid)
+        rm /var/run/blynk-openwrt.pid 
+    else
+        echo "PID file not found. Blynk OpenWRT script may not be running." >> $LOGFILE
+    fi
+}
