@@ -4,28 +4,42 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=blynk-lua
-PKG_MAINTAINER:=Maizil <maizilpc7@gmail.com>
-PKG_VERSION:=2.6
-PKG_RELEASE:=beta
-PKG_LICENSE:=Apache-2.0
-PKG_ARCH:=all
-
-PKG_DESCRIPTION:=Blynk Lua client library for OpenWrt integration, allowing control of IoT devices via Blynk.
-
-PKG_DEPENDS:=+luasocket
-
-ifeq ($(PKG_NAME), blynk-lua)
-  DOWNLOAD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
-  TAR_FILE:=$(DL_DIR)/$(PKG_NAME)-$(PKG_VERSION).tar.gz
-  ifneq ($(wildcard $(TAR_FILE)),)
-    $(info Paket sudah ada di $(TAR_FILE))
-  else
-    $(info Mendownload paket $(TAR_FILE)...)
-    $(call Download, $(TAR_FILE), https://example.com/path/to/blynk-lua-$(PKG_VERSION).tar.gz)
-  endif
-endif
+PKG_NAME:=blynk-openwrt
+PKG_VERSION:=1.0
+PKG_RELEASE:=1
+PKG_MAINTAINER:=Maizil <https://github.com/Maizil41>
 
 include $(INCLUDE_DIR)/package.mk
 
-$(eval $(call BuildPackage, $(PKG_NAME)))
+define Package/$(PKG_NAME)
+  SECTION:=net
+  CATEGORY:=Network
+  TITLE:=blynk-openwrt
+  URL:=https://github.com/Maizil41/blynk-openwrt
+  PKGARCH:=all
+endef
+
+define Package/$(PKG_NAME)/description
+  Blynk Lua client library for OpenWrt integration, allowing control of IoT devices via Blynk.
+endef
+
+define Package/$(PKG_NAME)/conffiles
+endef
+
+define Build/Configure
+endef
+
+define Build/Compile
+endef
+
+define Package/$(PKG_NAME)/install
+    $(INSTALL_DIR) $(1)/etc/init.d
+    $(INSTALL_DIR) $(1)/usr/bin
+    $(INSTALL_DIR) $(1)/usr/share
+
+    $(CP) -r $(PKG_BUILD_DIR)/files/etc/init.d/* $(1)/etc/init.d/
+    $(CP) -r $(PKG_BUILD_DIR)/files/usr/bin/* $(1)/usr/bin/
+    $(CP) -r $(PKG_BUILD_DIR)/files/usr/share/* $(1)/usr/share/
+endef
+
+$(eval $(call BuildPackage,$(PKG_NAME)))
