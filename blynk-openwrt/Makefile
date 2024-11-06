@@ -33,13 +33,17 @@ define Build/Compile
 endef
 
 define Package/$(PKG_NAME)/install
-    $(INSTALL_DIR) $(1)/etc/init.d
-    $(INSTALL_DIR) $(1)/usr/bin
-    $(INSTALL_DIR) $(1)/usr/share
+	$(INSTALL_DIR) /etc/init.d
+	$(INSTALL_DIR) /usr/bin
+	$(INSTALL_DIR) /usr/share
 
-    $(CP) -r $(PKG_BUILD_DIR)/files/etc/init.d/* $(1)/etc/init.d/
-    $(CP) -r $(PKG_BUILD_DIR)/files/usr/bin/* $(1)/usr/bin/
-    $(CP) -r $(PKG_BUILD_DIR)/files/usr/share/* $(1)/usr/share/
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_DIR) $(1)/usr/share
+
+	$(CP) -r ./files/etc/init.d/* $(1)/etc/init.d/
+	$(CP) -r ./files/usr/bin/* $(1)/usr/bin/
+	$(CP) -r ./files/usr/share/* $(1)/usr/share/
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
