@@ -41,7 +41,16 @@ define Package/$(PKG_NAME)/install
 	$(CP) -r ./files/etc/init.d/* $(1)/etc/init.d/
 	$(CP) -r ./files/usr/bin/* $(1)/usr/bin/
 	$(CP) -r ./files/usr/share/* $(1)/usr/share/
-	$(CP) ./files/postinst $(1)/etc/
+endef
+
+define Package/$(PKG_NAME)/postinst
+#!/bin/sh
+[ -n "$$IPKG_INSTROOT" ] || {
+	chmod +x /usr/bin/blynk-openwrt.lua
+	chmod +x -R /usr/share/lua/*
+	chmod +x /etc/init.d/blynk
+}
+exit 0
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
