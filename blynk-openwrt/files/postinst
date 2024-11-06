@@ -1,0 +1,5 @@
+#!/bin/sh
+
+chmod +x /usr/bin/blynk-openwrt.lua
+chmod +x -R /usr/share/lua/*
+chmod +x /etc/init.d/blynk
