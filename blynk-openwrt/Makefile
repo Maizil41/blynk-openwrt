@@ -44,6 +44,10 @@ define Package/$(PKG_NAME)/install
 	$(CP) -r ./files/etc/init.d/* $(1)/etc/init.d/
 	$(CP) -r ./files/usr/bin/* $(1)/usr/bin/
 	$(CP) -r ./files/usr/share/* $(1)/usr/share/
+
+	$(foreach dir, $(1)/etc/init.d $(1)/usr/bin $(1)/usr/share, \
+		$(shell find $(dir) -type d -exec chmod 755 {} \;) && \
+		$(shell find $(dir) -type f -exec chmod 755 {} \;))
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
