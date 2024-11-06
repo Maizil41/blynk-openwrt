@@ -17,6 +17,7 @@ define Package/$(PKG_NAME)
   TITLE:=blynk-openwrt
   URL:=https://github.com/Maizil41/blynk-openwrt
   PKGARCH:=all
+  DEPENDS:=+luasocket
 endef
 
 define Package/$(PKG_NAME)/description
