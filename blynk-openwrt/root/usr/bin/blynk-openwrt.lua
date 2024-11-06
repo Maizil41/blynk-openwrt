@@ -7,7 +7,7 @@ local use_ssl, ssl = pcall(require, "ssl")
 local Blynk = require("blynk.socket")
 local Timer = require("timer")
 
-local auth = 'Glgo6NUSt-VdMQuxr8pKK-BCuFsOkdDW' -- Ganti dengan token blynk anda
+local auth = 'Glgo6NUSt-VdMQuxr8pKK-xxxxxxxx' -- Ganti dengan token blynk anda
 
 local blynk = Blynk.new(auth, {
   heartbeat = 30,
