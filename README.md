@@ -5,6 +5,5 @@
 <hr/>
 
 ![Dashboard](img/dashboard.png)
-![Dashboard](img/android.png)
 
 </div>
